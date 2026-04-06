@@ -1,0 +1,6 @@
+fastapi==0.115.12
+numpy==2.2.5
+opencv-python-headless==4.11.0.86
+python-multipart==0.0.20
+tritonclient[grpc]==2.59.0
+uvicorn==0.34.2

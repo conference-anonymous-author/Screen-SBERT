@@ -1,0 +1,9 @@
+einops
+numpy
+opencv-python-headless
+pillow
+shapely
+timm
+torch
+torchvision
+transformers==4.49.0

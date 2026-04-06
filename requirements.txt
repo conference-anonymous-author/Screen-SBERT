@@ -1,0 +1,6 @@
+numpy>=1.24
+torch>=2.1
+optuna>=3.4
+onnx>=1.15
+pillow==11.2.1
+huggingface_hub
