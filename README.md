@@ -1,6 +1,6 @@
-# Screen-SBERT Project
+# Functional Semantics Embedding of GUI Screens for Knowledge-Augmented GUI Agents
 
-This repository contains the model implementation code and dataset for the paper "**Functional Semantics Embedding of GUI Screens for Knowledge-Augmented GUI Agents**," submitted to ACM MM 2026.
+This repository contains the model implementation code and dataset for the paper "**Functional Semantics Embedding of GUI Screens for Knowledge-Augmented GUI Agents**," submitted to **ACM MM 2026**.
 
 ---
 

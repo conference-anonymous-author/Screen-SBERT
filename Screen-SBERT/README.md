@@ -2,8 +2,6 @@
 
 Screen-SBERT is a contrastive-learning model for screen-level embedding from pre-parsed GUI element features.
 
-This README is a practical, end-to-end tutorial for first-time users.
-
 ## What This Project Expects
 
 This project **does not train directly from raw screenshots**.
