@@ -23,3 +23,7 @@ def postprocess_parse_gui(triton_results: dict) -> dict[str, np.ndarray]:
 
 def postprocess_screen_sbert(triton_results: dict) -> np.ndarray:
     return triton_results["screen_embedding"].astype(np.float32, copy=False)
+
+
+def postprocess_bge_text_embedding(triton_results: dict) -> np.ndarray:
+    return triton_results["EMBEDDINGS"].astype(np.float32, copy=False)

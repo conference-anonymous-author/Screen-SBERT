@@ -5,12 +5,34 @@ import logging
 import time
 
 import numpy as np
-from fastapi import APIRouter, File, Query, Response, UploadFile
+from fastapi import APIRouter, File, HTTPException, Query, Response, UploadFile
+from pydantic import BaseModel
 
 from service.TritonService import TritonService
 
 router = APIRouter()
 _service = TritonService()
+
+
+class TextEmbeddingRequest(BaseModel):
+    text: str | None = None
+    texts: list[str] | None = None
+
+
+def _normalize_texts(payload: TextEmbeddingRequest) -> list[str]:
+    items: list[str] = []
+    if payload.text is not None:
+        items.append(payload.text)
+    if payload.texts is not None:
+        items.extend(payload.texts)
+
+    normalized = [x.strip() for x in items if isinstance(x, str) and x.strip()]
+    if not normalized:
+        raise HTTPException(
+            status_code=400,
+            detail="Provide non-empty text via 'text' or 'texts'.",
+        )
+    return normalized
 
 
 @router.post("/merge_detect", tags=["merge-detection"])
@@ -119,4 +141,39 @@ async def screen_sbert_embed(
         content=payload,
         media_type="application/octet-stream",
         headers={"Content-Disposition": 'attachment; filename="screen_embedding.npy"'},
+    )
+
+
+@router.post("/text_embedding", tags=["text-embedding"])
+async def text_embedding(
+    payload: TextEmbeddingRequest,
+    return_type: str = Query(default="json"),
+):
+    t0 = time.time()
+
+    texts = _normalize_texts(payload)
+    embeddings = await _service.call_bge_text_embedding(texts=texts)
+    logging.info(f"text_embedding time: {time.time() - t0}")
+
+    return_type = return_type.strip().lower()
+    if return_type == "json":
+        return {
+            "num_texts": len(texts),
+            "embeddings_shape": list(embeddings.shape),
+            "embeddings": embeddings.tolist(),
+        }
+
+    if return_type not in ("npy", "numpy", "tensor"):
+        return {
+            "error": "invalid_return_type",
+            "supported": ["json", "npy"],
+        }
+
+    buffer = io.BytesIO()
+    np.save(buffer, embeddings.astype(np.float32, copy=False))
+    payload_bytes = buffer.getvalue()
+    return Response(
+        content=payload_bytes,
+        media_type="application/octet-stream",
+        headers={"Content-Disposition": 'attachment; filename="text_embeddings.npy"'},
     )

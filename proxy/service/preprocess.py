@@ -37,3 +37,14 @@ def preprocess_screen_sbert(image_bytes: bytearray) -> dict:
         image_bytes=image_bytes,
         output_names=["screen_embedding"],
     )
+
+
+def preprocess_bge_text_embedding(texts: list[str]) -> dict:
+    texts_np = np.array(texts, dtype=np.object_).reshape(-1, 1)
+    return {
+        "input_names": ["TEXTS"],
+        "input_sizes": [list(texts_np.shape)],
+        "input_data": [texts_np],
+        "input_types": ["BYTES"],
+        "output_names": ["EMBEDDINGS"],
+    }

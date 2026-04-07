@@ -7,8 +7,18 @@ import time
 
 import numpy as np
 
-from service.postprocess import postprocess_merge_detect, postprocess_parse_gui, postprocess_screen_sbert
-from service.preprocess import preprocess_merge_detect, preprocess_parse_gui, preprocess_screen_sbert
+from service.postprocess import (
+    postprocess_bge_text_embedding,
+    postprocess_merge_detect,
+    postprocess_parse_gui,
+    postprocess_screen_sbert,
+)
+from service.preprocess import (
+    preprocess_bge_text_embedding,
+    preprocess_merge_detect,
+    preprocess_parse_gui,
+    preprocess_screen_sbert,
+)
 from service.utils import run_triton_client
 
 
@@ -62,4 +72,20 @@ class TritonService:
         )
         result = postprocess_screen_sbert(triton_results)
         logging.info(f"screen_sbert total Time: {time.time() - t0} at {self.triton_grpc_url}")
+        return result
+
+    async def call_bge_text_embedding(
+        self,
+        texts: list[str],
+    ) -> np.ndarray:
+        t0 = time.time()
+        input_dict = preprocess_bge_text_embedding(texts)
+        triton_results = await asyncio.to_thread(
+            run_triton_client,
+            self.triton_grpc_url,
+            "bge_m3",
+            input_dict,
+        )
+        result = postprocess_bge_text_embedding(triton_results)
+        logging.info(f"bge_m3 text embedding total Time: {time.time() - t0} at {self.triton_grpc_url}")
         return result

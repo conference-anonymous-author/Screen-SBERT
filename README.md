@@ -16,6 +16,8 @@ The proxy exposes APIs such as `merge_detect`, `parse_gui`, and `screen_sbert_em
 
 ## 1) Environment Setup
 
+### Python Virtual Environment
+
 Create a Python 3.12 conda environment named `Screen-SBERT`, then install dependencies:
 
 ```bash
@@ -23,6 +25,27 @@ conda create -n Screen-SBERT python=3.12 -y
 conda activate Screen-SBERT
 pip install --upgrade pip
 pip install -r requirements.txt
+```
+
+You may also use other virtual environments, such as venv.
+
+### Docker
+
+Docker must be installed in your environment.
+If it is not installed, follow the steps below.
+
+```bash
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
+
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
 ---
@@ -220,3 +243,21 @@ https://huggingface.co/datasets/user83kd9x/knowledge_agent_benchmark
 
 ### Embedding Results for All Screenshots in the Benchmark Using Screen-SBERT, Along with Code for Clustering and Knowledge Merging
 https://huggingface.co/datasets/user83kd9x/screenshot_clustering
+
+---
+
+## Screenshot Embedding using MLLM
+
+This repository also includes prompts for embedding screenshots using an MLLM.
+
+The procedure is as follows:
+
+1. Provide the prompt in `gpt_embedding_prompt.py` to the MLLM along with the screenshot image.
+2. Extract the text from the "Functions" section of the response.
+3. Embed the text using the GUI Parser server and proxy provided in this repository.
+
+Text embeddings can be used as follows.
+
+```bash
+python example/text_embedding_example.py "Hello, World!"
+```
