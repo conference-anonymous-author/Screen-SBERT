@@ -34,8 +34,8 @@ hf download user83kd9x/screen_sbert_dataset \
   --local-dir dataset
 ```
 ```bash
-unzip dataset/gui_parsing.zip -d dataset/gui_parsing
-unzip dataset/screenshots.zip -d dataset/screenshots
+unzip dataset/gui_parsing.zip -d dataset/
+unzip dataset/screenshots.zip -d dataset/
 ```
 
 This dataset inherently satisfies the structural requirements described below.
