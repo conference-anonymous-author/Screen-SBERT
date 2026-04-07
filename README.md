@@ -236,16 +236,6 @@ Output:
 
 ---
 
-## Other Repositories Related to the Paper
-
-### Benchmark Dataset Used for Action Decision Experiments in This Study
-https://huggingface.co/datasets/user83kd9x/knowledge_agent_benchmark
-
-### Embedding Results for All Screenshots in the Benchmark Using Screen-SBERT, Along with Code for Clustering and Knowledge Merging
-https://huggingface.co/datasets/user83kd9x/screenshot_clustering
-
----
-
 ## Screenshot Embedding using MLLM
 
 This repository also includes prompts for embedding screenshots using an MLLM.
@@ -261,3 +251,13 @@ Text embeddings can be used as follows.
 ```bash
 python example/text_embedding_example.py "Hello, World!"
 ```
+
+---
+
+## Other Repositories Related to the Paper
+
+### Benchmark Dataset Used for Action Decision Experiments in This Study
+https://huggingface.co/datasets/user83kd9x/knowledge_agent_benchmark
+
+### Embedding Results for All Screenshots in the Benchmark Using Screen-SBERT, Along with Code for Clustering and Knowledge Merging
+https://huggingface.co/datasets/user83kd9x/screenshot_clustering
