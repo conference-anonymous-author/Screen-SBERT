@@ -238,7 +238,7 @@ Output:
 
 ## Screenshot Embedding using MLLM
 
-This repository also includes prompts for embedding screenshots using an MLLM.
+This repository also includes a prompt for embedding screenshots using an MLLM.
 
 The procedure is as follows:
 
