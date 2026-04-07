@@ -40,6 +40,9 @@ unzip dataset/screenshots.zip -d dataset/
 
 This dataset inherently satisfies the structural requirements described below.
 
+The Hugging Face link is provided below.
+https://huggingface.co/datasets/user83kd9x/screen_sbert_dataset
+
 ---
 
 ## 1) Dataset Structure Requirements
