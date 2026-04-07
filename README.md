@@ -31,7 +31,7 @@ pip install -r requirements.txt
 
 Prebuilt model files are hosted at:
 
-- `https://huggingface.co/user83kd9x/gui_parser_models`
+https://huggingface.co/user83kd9x/gui_parser_models
 
 Download and restore the directory structure into this repository path (`server/models/...`):
 
