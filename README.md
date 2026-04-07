@@ -210,3 +210,13 @@ Output:
 
 - `example/results/<image_stem>_screen_sbert_embedding.npy`
 - printed embedding shape in terminal
+
+---
+
+## Other Repositories Related to the Paper
+
+### Benchmark Dataset Used for Action Decision Experiments in This Study
+https://huggingface.co/datasets/user83kd9x/knowledge_agent_benchmark
+
+### Embedding Results for All Screenshots in the Benchmark Using Screen-SBERT, Along with Code for Clustering and Knowledge Merging
+https://huggingface.co/datasets/user83kd9x/screenshot_clustering
